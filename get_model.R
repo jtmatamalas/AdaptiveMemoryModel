@@ -19,7 +19,7 @@ Options:
   -m, --markovian                       Markovian model.
   -n <order>, --order <order>           Order of the model.
   -c <num_cores>, --cores <num_cores>   Number of CPU cores used to compute the model [default: 1]
-  --minimum_events <events>             Minimum number of evets to consider [default: 100]
+  --minimum_events <events>             Minimum number of evets to consider [default: <order> + 1]
 " -> doc
 
 opts <- docopt(doc)
@@ -31,8 +31,11 @@ order <- opts$order
 if (!is.na(as.numeric(order))){
   order <- as.numeric(order)
 }else{
-  message("Order must be a number.")
-  return(-1)
+  stop("Order must be a number.")
+}
+
+if (order < 2 && opts$adaptive) {
+  stop("Order must be greater than 2 to generate adaptive memory model")
 }
 
 num_cores <- opts$cores
@@ -47,8 +50,8 @@ min_events <- opts$"--minimum_events"
 if (!is.na(as.numeric(min_events))){
   min_events <- as.numeric(min_events)
 }else{
-  message("the number of miniumum events must be a number.")
-  return(-1)
+  # stop("the number of miniumum events must be a number.")
+  min_events = order + 1
 }
 
 parallel <- ifelse(num_cores > 1, T, F)

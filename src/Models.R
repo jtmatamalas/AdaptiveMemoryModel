@@ -1,3 +1,16 @@
+#------------------------------------------------------
+# Function that returns a given model
+# INPUT:
+#   input_filename: name of the file that contains input data in format: id_agent, timestamp, location_id
+#   model: An string that indicates with kind of model has to be generated (markovian | adaptive)
+#   order: the order of the markovian model
+#   parallel: boolean variable. True if the computation has to use multiple cores
+#   minimum_events: Minimum number of evets to consider the user
+# OUTPUT:
+#   edge_list: and edge_list from state nodes composed
+#   n_order from and n_order to. And the number of times
+#   that a transition between each element appears
+#------------------------------------------------------
 compute_model <- function(input_filename, model, order, parallel, minimum_events){
   message("Processing...")
   
@@ -89,6 +102,13 @@ getMarkovianModel <- function(pos_seq, n_order){
 #------------------------------------------------------
 # Function that computes the transition matrix of
 # adaptive memory model
+# INPUT:
+#   rle_list: run encoding list for each agent
+#   n_order: the order of the markovian model
+# OUTPUT:
+#   edge_list: and edge_list from state nodes composed
+#   n_order from and n_order to. And the number of times
+#   that a transition between each element appears
 #------------------------------------------------------
 getAdaptiveMemoryModel <- function(rle_list, n_order){
   #Get values and lengths for the rle_list
