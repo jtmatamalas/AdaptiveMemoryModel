@@ -1,6 +1,6 @@
 # AdaptiveMemoryModel
 
-This script provides a way to build the models used in<sup id="ref1">[1]</sup>, either markovian or adaptive memory model of any order <sup id="fn1">[2]</sup>.
+This script provides a way to build the models used in<sup id="ref1">[1]</sup>, either markovian or adaptive memory model of any order. 
 
 ## Requirements
 
@@ -33,12 +33,29 @@ The call to the script has to fulfill the following format:
 Rscript get_model.R (--adaptive | --markovian) --order <order> --input <input> --output <output> [--cores <num_cores> --minimum_events <events>]
 ```
 ### Parameters
-
+```
+  -h --help                             Show this screen.
+  -i <input>, --input <input>           Three column input CSV FILE in the form of (agent id, timestamp, location id).
+  -o <output>, --output <output>        Output file where to store the model.
+  -a, --adaptive                        Adaptive memory model.
+  -m, --markovian                       Markovian model.
+  -n <order>, --order <order>           Order of the model.
+  -c <num_cores>, --cores <num_cores>   Number of CPU cores used to compute the model [default: 1]
+  --minimum_events <events>             Minimum number of evets to consider [default: <order> + 1]
+```
 ### Output
+
+The output of the execution will be stored in the in a CSV file with the following format:
+- **The first _norder_ columns**: contain the encoding of the source following the format described in<sup id="ref1">[1]</sup>.
+- **The next _norder_ columns**: contain the encoding of the destination following the format described in<sup id="ref1">[1]</sup>.
+- **Transition probability**: the last column contain the transition from source to destination.
 
 ### Example
 
+As an example of the usage, let's consider the following command to generate an adaptive memory model of second order using the data stored in *test/data.csv* and store the results in a file called test.csv:
+```bash
+Rscript get_model.R -i test/data.csv -o test.csv -a -n 2
+```
+
 ## References
 1. <small id="ref1">Matamalas, Joan T., Manlio De Domenico, and Alex Arenas. "Assessing reliable human mobility patterns from higher order memory in mobile communications." Journal of The Royal Society Interface 13.121 (2016): 20160203.</small>
-
-2. <small id="fn1">In the case of the adaptive memory model, the order has to be at least 2.</small>
