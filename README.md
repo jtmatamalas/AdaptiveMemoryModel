@@ -46,8 +46,8 @@ Rscript get_model.R (--adaptive | --markovian) --order <order> --input <input> -
 ### Output
 
 The output of the execution will be stored in the in a CSV file with the following format:
-- **The first _norder_ columns**: contain the encoding of the source following the format described in<sup id="ref1">[1]</sup>.
-- **The next _norder_ columns**: contain the encoding of the destination following the format described in<sup id="ref1">[1]</sup>.
+- **The first _norder_ columns**: contain the encoding of the source following the format Src1, Src2,..., SrcN, being the last one the most recent position.
+- **The next _norder_ columns**: contain the encoding of the destination following the format Target1, Target2,..., TargetN, being the last one the most recent position.
 - **Transition probability**: the last column contain the transition from source to destination.
 
 ### Example
