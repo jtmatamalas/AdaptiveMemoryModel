@@ -1,5 +1,7 @@
 # AdaptiveMemoryModel
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4061979.svg)](https://doi.org/10.5281/zenodo.4061979)
+
 This script provides a way to build the models used in<sup id="ref1">[1]</sup>, either markovian or adaptive memory model of any order. 
 
 ## Requirements
